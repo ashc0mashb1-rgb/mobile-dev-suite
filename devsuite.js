@@ -15,7 +15,12 @@ Object.assign(btn.style,{
  fontSize:'22px',zIndex:999999,opacity:S.stealth?0.2:0.9
 });
 document.body.appendChild(btn);
+let open = false;
 
+btn.onclick = () => {
+  open = !open;
+  sheet.style.bottom = open ? '0' : '-100%';
+};
 // drag
 let d=false,dx,dy;
 btn.ontouchstart=e=>{d=true;dx=e.touches[0].clientX-btn.offsetLeft;dy=e.touches[0].clientY-btn.offsetTop;}
