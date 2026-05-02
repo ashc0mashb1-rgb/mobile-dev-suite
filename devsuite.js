@@ -6,8 +6,8 @@ const S = JSON.parse(localStorage.__MDS||"{}");
 
 // ---------- FLOAT BUTTON ----------
 const btn=document.createElement('div');
-btn.innerHTML=S.stealth?'':'⚡';
-Object.assign(btn.style,{
+btn.innerHTML=S.stealth?'':'👹';
+Object.assign(btn.style,{ 
  position:'fixed',bottom:'100px',right:'20px',
  width:'60px',height:'60px',borderRadius:'50%',
  background:'#000',color:'#fff',display:'flex',
@@ -29,7 +29,7 @@ window.ontouchend=()=>d=false;
 
 // ---------- PANEL ----------
 const sheet=document.createElement('div');
-Object.assign(sheet.style,{
+Object.assign(sheet.style,{ 
  position:'fixed',left:0,bottom:'-100%',
  width:'100%',height:'65%',
  background:'#111',color:'#fff',
@@ -70,7 +70,7 @@ let inspecting=false,selectedEl,hl;
 function startInspect(){
  inspecting=true;
  hl=document.createElement('div');
- Object.assign(hl.style,{
+ Object.assign(hl.style,{ 
   position:'fixed',border:'2px solid #00ffc3',
   background:'rgba(0,255,200,0.15)',
   zIndex:999998,pointerEvents:'none'
@@ -90,7 +90,7 @@ function pick(e){
  const el=e.target;
  selectedEl=el;
  const r=el.getBoundingClientRect();
- Object.assign(hl.style,{
+ Object.assign(hl.style,{ 
   top:r.top+'px',left:r.left+'px',
   width:r.width+'px',height:r.height+'px'
  });
