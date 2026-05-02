@@ -18,8 +18,7 @@ document.body.appendChild(btn);
 let open = false;
 
 btn.onclick = () => {
-  alert('clicked');
-};
+  open = !open;
   sheet.style.bottom = open ? '0' : '-100%';
 };
 // drag
