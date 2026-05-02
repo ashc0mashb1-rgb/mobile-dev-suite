@@ -1,4 +1,4 @@
-javascript:(function(){
+(function(){
 if(window.__MDS)return;window.__MDS=1;
 
 // ---------- STATE ----------
