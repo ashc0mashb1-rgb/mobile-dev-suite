@@ -17,19 +17,61 @@ Object.assign(btn.style,{
 document.body.appendChild(btn);
 let open = false;
 
-btn.onclick = () => {
+btn.style.touchAction = "none";
   open = !open;
   sheet.style.bottom = open ? '0' : '-100%';
 };
 // drag
-let d=false,dx,dy;
-btn.ontouchstart=e=>{d=true;dx=e.touches[0].clientX-btn.offsetLeft;dy=e.touches[0].clientY-btn.offsetTop;}
-window.ontouchmove=e=>{
- if(!d)return;
- btn.style.left=(e.touches[0].clientX-dx)+'px';
- btn.style.top=(e.touches[0].clientY-dy)+'px';
- btn.style.right='auto';btn.style.bottom='auto';
-};
+let open = false;
+let pressTimer = null;
+let lastTap = 0;
+let dragging = false;
+let dx, dy;
+
+btn.addEventListener('touchstart', (e) => {
+  const now = Date.now();
+
+  pressTimer = setTimeout(() => {
+    dragging = true;
+  }, 450);
+
+  if (now - lastTap < 300) {
+    clearTimeout(pressTimer);
+    dragging = false;
+
+    if (typeof startInspect === "function") {
+      startInspect();
+    }
+  }
+
+  lastTap = now;
+
+  const t = e.touches[0];
+  dx = t.clientX - btn.offsetLeft;
+  dy = t.clientY - btn.offsetTop;
+});
+
+btn.addEventListener('touchmove', (e) => {
+  if (!dragging) return;
+
+  const t = e.touches[0];
+  btn.style.left = (t.clientX - dx) + 'px';
+  btn.style.top = (t.clientY - dy) + 'px';
+
+  btn.style.right = 'auto';
+  btn.style.bottom = 'auto';
+});
+
+btn.addEventListener('touchend', () => {
+  clearTimeout(pressTimer);
+
+  if (!dragging) {
+    open = !open;
+    sheet.style.bottom = open ? '0' : '-100%';
+  }
+
+  dragging = false;
+});
 window.ontouchend=()=>d=false;
 
 // ---------- PANEL ----------
